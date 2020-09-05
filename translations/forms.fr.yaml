@@ -1,3 +1,4 @@
+# Traduction pour les propriétés
 City: Ville
 Title: Titre
 Price: Prix
@@ -9,3 +10,9 @@ Address: Adresse
 Sold: Vendu / Loué
 Surface: Surface
 Description: Description
+
+# Traduction pour annonces
+Categories: Catégorie
+Release date: Date de sortie
+Content: Information supplémentaire
+Status: Statut

@@ -15,6 +15,20 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Ads
 {
+
+    const CHARGES =[
+        1 => '(Eau + Électricité)',
+        2 => '(Eau)',
+        3 => '(Électricité)',
+        4 => 'Sans Charge'
+    ];
+
+    // const TITRE =[
+    //     1 => 'Je libère une maison, j\'en cherche une autre',
+    //     2 => 'Cherche (maison, chambre, studio, appartement) à louer',
+    //     3 => 'Cherche (maison, chambre, studio, appartement) en vente'
+    // ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -24,11 +38,12 @@ class Ads
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=8, max=100)
      */
-    private $title;
+    private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $content;
 
@@ -78,19 +93,31 @@ class Ads
      */
     private $updated_at;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="annonces", orphanRemoval=true, cascade={"persist"})
+     */
+    private $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+        $this->created_at = new \DateTime();
+        $this->updated_at = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitre(): ?string
     {
-        return $this->title;
+        return $this->titre;
     }
 
-    public function setTitle(string $title): self
+    public function setTitre(string $titre): self
     {
-        $this->title = $title;
+        $this->titre = $titre;
 
         return $this;
     }
@@ -160,69 +187,69 @@ class Ads
         return $this;
     }
 
-    /**
-     * @return Collection|Picture[]
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
+    // /**
+    //  * @return Collection|Picture[]
+    //  */
+    // public function getPictures(): Collection
+    // {
+    //     return $this->pictures;
+    // }
 
-     public function getPicture(): ?Picture
-    {
-        if ($this->pictures->isEmpty()) {
-            return null;
-        }
-        return $this->pictures->first();
-    }
+    //  public function getPicture(): ?Picture
+    // {
+    //     if ($this->pictures->isEmpty()) {
+    //         return null;
+    //     }
+    //     return $this->pictures->first();
+    // }
 
-    public function addPicture(Picture $picture): self
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures[] = $picture;
-            $picture->setAds($this);
-        }
+    // public function addPicture(Picture $picture): self
+    // {
+    //     if (!$this->pictures->contains($picture)) {
+    //         $this->pictures[] = $picture;
+    //         $picture->setAds($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removePicture(Picture $picture): self
-    {
-        if ($this->pictures->contains($picture)) {
-            $this->pictures->removeElement($picture);
-            // set the owning side to null (unless already changed)
-            if ($picture->getAds() === $this) {
-                $picture->setAds(null);
-            }
-        }
+    // public function removePicture(Picture $picture): self
+    // {
+    //     if ($this->pictures->contains($picture)) {
+    //         $this->pictures->removeElement($picture);
+    //         // set the owning side to null (unless already changed)
+    //         if ($picture->getAds() === $this) {
+    //             $picture->setAds(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
 
-    /**
-     * @return mixed
-     */ 
-    public function getPictureFiles()
-    {
-        return $this->pictureFiles;
-    }
+    // /**
+    //  * @return mixed
+    //  */ 
+    // public function getPictureFiles()
+    // {
+    //     return $this->pictureFiles;
+    // }
 
-    /**
-     * @param mixed $pictureFiles
-     * @return  self
-     */ 
-    public function setPictureFiles($pictureFiles): self
-    {
-        foreach ($pictureFiles as $pictureFile) {
-            $picture = new Picture();
-            $picture->setImageFile($pictureFile);
-            $this->addPicture($picture);
-        }
-        $this->pictureFiles = $pictureFiles;
+    // /**
+    //  * @param mixed $pictureFiles
+    //  * @return  self
+    //  */ 
+    // public function setPictureFiles($pictureFiles): self
+    // {
+    //     foreach ($pictureFiles as $pictureFile) {
+    //         $picture = new Picture();
+    //         $picture->setImageFile($pictureFile);
+    //         $this->addPicture($picture);
+    //     }
+    //     $this->pictureFiles = $pictureFiles;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getReleaseDate(): ?\DateTimeInterface
     {
@@ -256,6 +283,61 @@ class Ads
     public function setCategories(?Category $categories): self
     {
         $this->categories = $categories;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setAnnonces($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getAnnonces() === $this) {
+                $image->setAnnonces(null);
+            }
+        }
 
         return $this;
     }

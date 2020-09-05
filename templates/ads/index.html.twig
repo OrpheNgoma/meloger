@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ads index
+{% endblock %}
+
+{% block body %}
+	<main class="pt-5 mx-lg-5">
+		<div class="container-fluid mt-5">
+
+			<h1>Gérer les annonces</h1>
+
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+
+			<table id="dtBasicExample" class="table" width="100%">
+				<thead>
+					<tr>
+						<th class="th-sm">Titre</th>
+						<th class="th-sm">Description</th>
+						<th class="th-sm">Quartier(s)</th>
+						<th class="th-sm">Prix</th>
+						<th class="th-sm">Charges</th>
+						<th class="th-sm">Date de sortie</th>
+						<th class="th-sm">Statut</th>
+						<th class="th-sm">actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for ad in ads %}
+						<tr>
+							<td>{{ ad.titre }}</td>
+							<td>{{ ad.content }}</td>
+							<td>{{ ad.address }}</td>
+							<td>{{ ad.price }}</td>
+							<td>{{ ad.charges }}</td>
+							<td>{{ ad.releaseDate ? ad.releaseDate|date('Y-m-d') : '' }}</td>
+							<td>{{ ad.status ? 'Yes' : 'No' }}</td>
+							<td>
+								<a href="{{ path('ads_show', {'id': ad.id}) }}" class="btn btn-warning">Voir</a>
+								<a href="{{ path('ads_edit', {'id': ad.id}) }}" class="btn btn-secondary">Editer</a>
+								<form method="post" action="{{ path('ads_delete', {id: ad.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ad.id) }}">
+									<button class="btn btn-danger">Supprimer</button>
+								</form>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="11">Aucun enregistrement trouvé</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+			<a href="{{ path('ads_new') }}" class="btn btn-primary">Ajouter une nouvelle annonce</a>
+			<br><br>
+
+		</div>
+	</main>
+
+{% endblock %}
