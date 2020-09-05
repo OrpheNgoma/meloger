@@ -1,0 +1,48 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Liste des Conditions
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+	<div class="container-fluid mt-5">
+
+		<h1>Liste des Conditions</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for condition in conditions %}
+					<tr>
+						<td>{{ condition.id }}</td>
+						<td>{{ condition.name }}</td>
+						<td>
+							<a href="{{ path('condition_edit', {'id': condition.id}) }}" class="btn btn-secondary">Éditer</a>
+							<form method="post" action="{{ path('condition_delete', {'id': condition.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?');">
+
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ condition.id) }}">
+								<button class="btn btn-danger">Supprimer</button>
+							</form>
+
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3" align="center">Aucun enregistrement trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="text-right">
+			<a href="{{ path('condition_new') }}" class="btn btn-primary">Créer une nouvelle condition</a>
+		</div>
+	</div>
+</main>
+{% endblock %}

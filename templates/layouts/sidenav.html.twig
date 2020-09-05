@@ -1,0 +1,51 @@
+<!-- Sidebar -->
+<div class="sidebar-fixed position-fixed">
+
+	<a class="logo-wrapper waves-effect">
+		<img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
+	</a>
+
+	<div class="list-group list-group-flush">
+		<a href="#" class="list-group-item waves-effect">
+			<i class="fas fa-chart-pie mr-3"></i>Dashboard
+		</a>
+
+		<a href="{{ path('property_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'gestbien' %}active{% endif %}">
+			<i class="fas fa-table mr-3"></i>Gestion des biens
+		</a>
+
+		<a href="{{ path('option_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'option' %}active{% endif %}">
+			<i class="fas fa-table mr-3"></i>Options
+		</a>
+
+		<a href="{{ path('category_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'category' %}active{% endif %}">
+			<i class="fas fa-category mr-3"></i>Categories
+		</a>
+
+		<a href="{{ path('condition_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'condition' %}active{% endif %}">
+			<i class="fas fa-table mr-3"></i>Conditions
+		</a>
+
+		<a href="{{ path('tag_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'tag' %}active{% endif %}">
+			<i class="fas fa-tag mr-3"></i>Tags
+		</a>
+
+		<a href="{{ path('fonction_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'fonction' %}active{% endif %}">
+			<i class="fas fa-table mr-3"></i>Fonctions
+		</a>
+
+		<a href="{{ path('app_users') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'gestuser' %}active{% endif %}">
+			<i class="fas fa-user mr-3"></i>Utilisateurs
+		</a>
+
+		{% if not is_granted('ROLE_OWNER') %}
+
+			<a href="{{ path('agent_index') }}" class="list-group-item list-group-item-action waves-effect {% if current_menu is defined and current_menu == 'gestagent' %}active{% endif %}">
+				<i class="fas fa-table mr-3"></i>Agent
+			</a>
+
+		{% endif %}
+	</div>
+</div>
+
+<!-- Sidebar -->

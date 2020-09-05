@@ -1,0 +1,28 @@
+<div class="card mb-4">
+	{% if property.picture %}
+		<img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+	{% else %}
+		<img src="{{ 'images/properties/guest-room.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+	{% endif %}
+	<div class="card-body">
+		{% for tag in property.tags %}
+			<a href="#" class="badge badge-success">{{ tag.name }}</a>
+		{% endfor %}
+		<h5 class="card-title">
+			<p class="card-text">Publié le
+				{{ property.createdAt|date('d-m-y à h\\hi') }}</p>
+			<a href="{{ path('property.show', {slug: property.slug, id: property.id}) }} ">
+				{{ property.title|u.truncate(30, '...') }}
+			</a>
+		</h5>
+		<p class="card-text">
+			{{ property.address }}</p>
+		<div class="text-primary" style="font-weight: bold;font-size: 2rem">
+			{{ property.FormattedPrice }}
+			FCFA
+		</div>
+	</div>
+</div>
+
+{# {{ property.surface }}
+m² - #}

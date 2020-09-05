@@ -1,0 +1,59 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title%}
+	Liste des Utilisateurs
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+	<div class="container-fluid mt-5">
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		<h1>Litse des Utilisateurs</h1>
+		<table id="users" class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom d'utilisateur</th>
+					<th>Téléphone</th>
+					<th>roles</th>
+					<th>Statut</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td>{{ user.id }}</td>
+						<td>{{ user.username }}</td>
+						<td>{{ user.phone }}</td>
+						<td>
+							{% for role in user.roles %}
+								{% if role=="ROLE_USER" %}
+									Utilisateur(locataire)
+								{% elseif role=="ROLE_AGENT" %}
+									Agent Immobilier
+								{% elseif role=="ROLE_OWNER" %}
+									Bailleur
+								{% elseif role=="ROLE_ADMIN" %}
+									Administrateur
+								{% endif %}
+							{% endfor %}
+						</td>
+						<td>{{ user.isActive }}</td>
+						<td>
+							<a href="{{ path('user_edit', {'id': user.id }) }}" class="btn btn-dark">Modifier</a>
+
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</main>
+{% endblock %}

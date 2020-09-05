@@ -1,0 +1,137 @@
+<script>
+	import 'slick-carousel'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+</script>
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}ME LOGER!
+			{% endblock %}
+		</title>
+		<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+			<link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
+
+			<link rel="stylesheet" href="{{ asset('build/css/mdb.min.css') }}">
+
+			<link
+			rel="stylesheet" href="{{ asset('build/css/style.css') }}">
+
+			<!-- Load Flashy default CSS -->
+			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+			{{ encore_entry_link_tags('app') }}
+
+		{% endblock %}
+	</head>
+	<body>
+
+		<nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar primary-color-dark">
+			<a class="navbar-brand" href="{{path('home')}}">ME LOGER</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item {% if current_menu is defined and current_menu == 'home' %}active{% endif %}">
+						<a href="{{ path('home') }}" class="nav-link">ACCUEIL</a>
+					</li>
+					<li class="nav-item {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}">
+						<a href="{{ path('app_property_index') }}" class="nav-link">LES PROPRIÉTÉS</a>
+					</li>
+				</ul>
+				{% if app.user %}
+					<ul class="navbar-nav">
+						{% if app.user %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fas fa-user"></i>
+									{{ app.user.username }}
+								</a>
+								<div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+									<a class="dropdown-item" href="{{ path('property_index') }}">Mon compte</a>
+									<a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+								</div>
+							</li>
+						{% endif %}
+					</ul>
+				{% endif %}
+
+				{% if not app.user %}
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="{{ path('app_login') }}" class="nav-link">CONNEXION</a>
+						</li>
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="{{ path('app_register') }}" class="nav-link">INSCRIPTION</a>
+						</li>
+					</ul>
+				{% endif %}
+			</div>
+		</nav>
+		{% block flash %}
+			{% for flash_message in app.session.flashbag.get('success') %}
+				<div class="container alert alert-success" role="alert">
+					{{ flash_message }}
+				</div>
+			{% endfor %}
+			{% for flash_message in app.session.flashbag.get('info') %}
+				<div class="container alert alert-info" role="alert">
+					{{ flash_message }}
+				</div>
+			{% endfor %}
+			{% for flash_message in app.session.flashbag.get('warning') %}
+				<div class="container alert alert-warning" role="alert">
+					{{ flash_message }}
+				</div>
+			{% endfor %}
+			{% for flash_message in app.session.flashbag.get('danger') %}
+				<div class="container alert alert-danger" role="alert">
+					{{ flash_message }}
+				</div>
+			{% endfor %}
+		{% endblock %}
+
+		{% block body %}{% endblock %}
+
+		{% block javascripts %}
+
+			<script src="{{ asset('build/js/jquery-3.4.1.min.js') }}"></script>
+
+			<script src="{{ asset('build/js/popper.min.js') }}"></script>
+
+			<script src="{{ asset('build/js/bootstrap.min.js') }}"></script>
+
+			<script src="{{ asset('build/js/mdb.js') }}"></script>
+
+			<script src="{{ asset('build/app.js') }}"></script>
+
+			<script type="text/javascript" src="{{ asset('build/js/mdb.min.js') }}"></script>
+
+			<!-- Flashy depends on jQuery -->
+			<script src="//code.jquery.com/jquery.js"></script>
+			<!-- Load Flashy default JavaScript -->
+			<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+
+			{{ encore_entry_script_tags('app') }}
+
+		{% endblock %}
+		<!-- Include Flashy default partial -->
+		{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+	</body>
+</html>

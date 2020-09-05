@@ -1,0 +1,708 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ME LOGER !
+{% endblock %}
+
+{% block body %}
+
+	<!-- Jumbotron -->
+	<div class="card card-image mt-5" style="background-image: url(images/home4.jpg);">
+
+		<div class="text-white text-center rgba-stylish-strong py-5 px-15">
+			<div class="py-5">
+
+				<!-- Content -->
+				<h5 class="h5 orange-text">
+					<i class="fas fa-home"></i>
+					<strong>ME LOGER</strong></h5>
+				<h2 class="card-title h3 my-4 py-2">TROUVEZ FACILEMENT ET RAPIDEMENT UN LOGEMENT</h2>
+				<p class="mb-4 pb-2 px-md-5 mx-md-5">Vous êtes à la recherche d'une maison, un appartement,<br/> un duplex <strong>vente ou en location</strong> ?</p>
+				<a href="{{ path('app_property_index') }}" class="btn btn-indigo">
+					<i class="fas fa-clone left"></i>
+					Parcourir les propriétés</a>
+
+			</div>
+		</div>
+	</div>
+	<!-- Jumbotron -->
+
+<div class="container">
+  <br><br>
+<h2 class="h2 orange-text" align="center" 
+style="text-transform:uppercase;">PROPRIÉTÉS RÉCENTES</h2>
+<h6 align="center" style="color:grey;">Les 6 dernières propriétés ajoutées</h6>
+<hr class="hr-dark my-4" width="255px">
+		</br>
+	</br>
+	<div class="row">
+		{% for property in properties %}
+			<div class="col-md-4">
+				<div class="card mb-4">
+					{% if property.picture %}
+						<img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+					{% else %}
+						<img src="{{ 'images/properties/guest-room.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height:auto;">
+					{% endif %}
+					<div class="card-body">
+						{% for tag in property.tags %}
+							<a href="#" class="badge orange">{{ tag.name }}</a>
+						{% endfor %}
+						<h4 class="card-title">
+            <br/>
+              <p class="card-text">Publié le {{ property.createdAt|date('d-m-y à h\\hi') }}</p>
+							<a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title|u.truncate(15, '...') }}</a>
+						</h4>
+						<p class="card-text">
+							{{ property.address }}
+						</p>
+						<div class="text-primary" style="font-weight:bold;font-size:2rem">
+							{{ property.FormattedPrice }}
+							FCFA</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<br/><br/>
+
+<style>
+
+	html,
+	body,
+	header,
+	.view {
+		height: 100%;
+	}
+</style>
+
+<!-- Main navigation -->
+<header>
+
+	<!-- Full Page Intro -->
+	<div
+		class="view grey lighten-3">
+		<!-- Mask & flexbox options-->
+		<div
+			class="mask">
+			<!-- Content -->
+			<div
+				class="container h-100">
+				<!--Grid row-->
+				<div
+					class="row align-items-center h-100">
+					<!--Grid column-->
+					<div class="col-md-6 col-sm-6">
+						<h1 class="h1-responsive mb-4">Trouvez
+							<span class="orange-text">Facilement</span><br>et <span class="indigo-text">Rapidement</span>
+							le logement qui vous convient.</h1>
+						<p class="mb-4 pb-2 dark-grey-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae, culpa qui officia deserunt laborum fuga similique mollit id quos aperiam proident non ut rerum debitis.</p>
+						<a href="{{ path('app_property_index') }}" class="btn btn-indigo btn-rounded btn-md ml-md-0">Voir les Propriétés</a>
+						<a href="{{ path('app_register') }}" class="btn warning-color-dark btn-rounded btn-md">Ajouter votre propriété</a>
+					</div>
+					<!--Grid column-->
+
+					<!--Grid column-->
+					<div class="col-md-6 col-sm-6">
+						<img src="images/home12.svg" alt="" class="img-fluid">
+					</div>
+					<!--Grid column-->
+				</div>
+				<!--Grid row-->
+			</div>
+			<!-- Content -->
+		</div>
+		<!-- Mask & flexbox options-->
+	</div>
+	<!-- Full Page Intro -->
+
+</header>
+<!-- Main navigation -->
+
+
+<br/>
+
+<div
+	class="container my-5">
+
+	<!-- Section -->
+	<section>
+
+		<h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Sur</h6>
+		<h3 class="font-weight-bold text-center orange-text pb-2">ME LOGER</h3>
+		<hr class="w-header my-4">
+		<p class="lead text-center text-muted pt-2 mb-5">Vous pourrez facilement.</p>
+
+		<div class="row">
+
+			<div class="col-md-6 col-xl-3 mb-4">
+				<div class="card text-center warning-color-dark text-white">
+					<div class="card-body">
+						<p class="mt-4 pt-2">
+							<i class="far fa-object-ungroup fa-4x"></i>
+						</p>
+						<h5 class="font-weight-normal my-4 py-2">
+							<a class="text-white" href="#">Trouvez un logement</a>
+						</h5>
+						<p class="mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-xl-3 mb-4">
+				<div class="card text-center">
+					<div class="card-body">
+						<p class="mt-4 pt-2">
+							<i class="fas fa-mobile-alt fa-4x grey-text"></i>
+						</p>
+						<h5 class="font-weight-normal my-4 py-2">
+							<a class="dark-grey-text" href="#">Avoir des infos</a>
+						</h5>
+						<p class="text-muted mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-xl-3 mb-4">
+				<div class="card text-center primary-color-dark lighten-1 text-white">
+					<div class="card-body">
+						<p class="mt-4 pt-2">
+							<i class="fas fa-chart-line fa-4x"></i>
+						</p>
+						<h5 class="font-weight-normal my-4 py-2">
+							<a class="text-white" href="#">Contacter le gérant</a>
+						</h5>
+						<p class="mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 col-xl-3">
+				<div class="card text-center">
+					<div class="card-body">
+						<p class="mt-4 pt-2">
+							<i class="fas fa-bullhorn fa-4x grey-text"></i>
+						</p>
+						<h5 class="font-weight-normal my-4 py-2">
+							<a class="dark-grey-text" href="#">Ajouter une propriété</a>
+						</h5>
+						<p class="text-muted mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</section>
+	<!-- Section -->
+
+</div>
+
+<br/>
+  <!-- Section: Block Content -->
+<section>
+
+  <!-- Carousel Wrapper -->
+  <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-2" data-slide-to="1"></li>
+      <li data-target="#carousel-example-2" data-slide-to="2"></li>
+    </ol>
+    <!-- Indicators -->
+    <!-- Slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active">
+        <div class="view">
+          <a href="#!">
+          	<img class="d-block w-100" src="images/home1.jpg" alt="First slide">
+          	<div class="mask rgba-white-slight text-center d-flex align-items-center justify-content-center">
+            	<div class="row">
+              	<div class="col-12">
+                	<p class="h1-responsive red-text font-weight-bold mb-0">Sale off 30% on every saturday!</p>
+              	</div>
+            	</div>
+          	</div>
+       		</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!-- Mask color -->
+        <div class="view">
+          <a>
+          	<img class="d-block w-100" src="images/home2.jpg" alt="Second slide">
+          	<div class="mask rgba-white-slight text-center d-flex align-items-center justify-content-center">
+            	<div class="row">
+              	<div class="col-12">
+                	<p class="h1-responsive indigo-text font-weight-bold mb-0">Promotion on each smartphone!</p>
+              	</div>
+            	</div>
+          	</div>
+          </a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <!-- Mask color -->
+        <div class="view">
+          <a>
+          	<img class="d-block w-100" src="images/home3.jpg" alt="Third slide">
+          	<div class="mask rgba-white-slight text-center d-flex align-items-center justify-content-center">
+            	<div class="row">
+              	<div class="col-12">
+                	<p class="h1-responsive orange-text font-weight-bold mb-0">Sale off 20% on every headphones!</p>
+                </div>
+            	</div>
+          	</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Slides -->
+    <!-- Controls -->
+    <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <!-- Controls -->
+  </div>
+  <!-- Carousel Wrapper -->
+
+</section>
+<!-- Section: Block Content -->
+
+<br/>
+
+<div
+	class="container z-depth-1 my-5 pt-5 pb-3 px-5">
+	<!-- Section -->
+	<section>
+    <style>
+      .fa-play:before {
+        margin-left: 0.3rem;
+      }
+
+      /* Steps */
+      .step {
+        list-style: none;
+        margin: 0;
+      }
+
+      .step-element {
+        display: flex;
+        padding: 1rem 0;
+      }
+
+      .step-number {
+        position: relative;
+        width: 7rem;
+        flex-shrink: 0;
+        text-align: center;
+      }
+
+      .step-number .number {
+        color: #00000;
+        background-color: orange;
+        font-size: 1.5rem;
+      }
+
+      .step-number .number {
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+      }
+
+      .number {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 38px;
+        border-radius: 10rem;
+      }
+
+      .step-number::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 48px;
+        bottom: -2rem;
+        margin-left: -1px;
+        border-left: 2px dashed #eaeff4;
+      }
+
+      .step .step-element:last-child .step-number::before {
+        bottom: 1rem;
+      }
+    </style>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+            <iframe id="player" class="embed-responsive-item" src="https://www.youtube.com/embed/7MUISDJ5ZZ4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="font-weight-bold text-center orange-text pb-2" 
+    style="text-transform:uppercase;">Trois étapes faciles</h3>
+    <hr class="hr-dark my-4" width="255px">
+    <p class="lead text-center text-muted pt-2 mb-5">Pour ajouter votre propriété sur <strong style="color:orange;">Me Loger</strong>.</p>
+
+    <div class="row align-items-center">
+
+      <div class="col-lg-6 mb-4">
+        <div class="view z-depth-1-half rounded">
+          <img class="rounded img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(6).jpg" alt="Video title">
+          <div class="mask flex-center rgba-black-light">
+            <a id="play" class="btn-floating btn-primary btn-lg" data-toggle="modal" data-target="#modal1"><i class="fas fa-play"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-4">
+
+        <ol class="step pl-0">
+          <li class="step-element pb-0">
+            <div class="step-number">
+              <span class="number">1</span>
+            </div>
+            <div class="step-excerpt">
+              <h6 class="font-weight-bold indigo-text mb-3">S'inscrire</h6>
+              <p class="text-muted">Think the or organization same proposal to affected heard reclined in be it reassuring.</p>
+            </div>
+          </li>
+          <li class="step-element pb-0">
+            <div class="step-number">
+              <span class="number">2</span>
+            </div>
+            <div class="step-excerpt">
+              <h6 class="font-weight-bold indigo-text mb-3">Se connecter</h6>
+              <p class="text-muted">Think the or organization same proposal to affected heard reclined in be it reassuring.</p>
+            </div>
+          </li>
+          <li class="step-element pb-0">
+            <div class="step-number">
+              <span class="number">3</span>
+            </div>
+            <div class="step-excerpt">
+              <h6 class="font-weight-bold indigo-text mb-3">Ajouter une propriété</h6>
+              <p class="text-muted">Think the or organization same proposal to affected heard reclined in be it reassuring.</p>
+            </div>
+          </li>
+        </ol>
+
+      </div>
+
+    </div>
+    
+  </section>
+  <!-- Section -->
+
+</div>
+
+<br/>
+
+<h2 class="h2 orange-text" align="center" style="text-transform:uppercase;">
+POUR PLUS D'INFORMATIONS</h2>
+<hr class="hr-dark my-4" width="255px">
+
+<div class="container my-5">
+
+  <!--Section: Content-->
+  <section class="contact-section dark-grey-text mb-5">
+    
+    <style>
+      .contact-section .form .btn-floating {
+        left: 3px;
+      }
+    </style>
+
+    <!-- Form with header -->
+    <div class="card">
+
+      <!-- Grid row -->
+      <div class="row">
+
+        <!-- Grid column -->
+        <div class="col-lg-8">
+
+          <div class="card-body form">
+
+            <!-- Header -->
+            <h3 class="font-weight-bold indigo-text mt-4"><i class="fas fa-envelope pr-2 mr-1"></i>Écrivez-nous:</h3>
+
+            <!-- Grid row -->
+            <div class="row">
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input type="text" id="form-contact-name" class="form-control">
+                  <label for="form-contact-name" class="">Votre nom</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input type="text" id="form-contact-email" class="form-control">
+                  <label for="form-contact-email" class="">Votre email</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="row">
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input type="text" id="form-contact-phone" class="form-control">
+                  <label for="form-contact-phone" class="">Votre téléphone</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6">
+                <div class="md-form mb-0">
+                  <input type="text" id="form-contact-company" class="form-control">
+                  <label for="form-contact-company" class="">Votre entreprise</label>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+            <!-- Grid row -->
+            <div class="row">
+
+              <!-- Grid column -->
+              <div class="col-md-12">
+                <div class="md-form mb-0">
+                  <textarea id="form-contact-message" class="form-control md-textarea" rows="3"></textarea>
+                  <label for="form-contact-message">Votre message</label>
+                  <a class="btn-floating btn-lg blue">
+                    <i class="far fa-paper-plane"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+          </div>
+
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-lg-4">
+
+          <div class="card-body contact text-center h-100 white-text indigo">
+
+            <h5 class="font-weight-bold my-4 pb-2 orange-text">Informations de contact</h5>
+            <ul class="text-lg-left list-unstyled ml-4">
+              <li>
+                <p><i class="fas fa-map-marker-alt pr-2"></i>Libreville, Ambowè, Gabon</p>
+              </li>
+              <li>
+                <p><i class="fas fa-phone pr-2"></i>+241 074 42 79 89</p>
+              </li>
+              <li>
+                <p><i class="fas fa-phone pr-1"></i>+241 077 68 89 13</p>
+              </li>
+              <li>
+                <p><i class="fas fa-envelope pr-2"></i>meloger241@gmail.com</p>
+              </li>
+            </ul>
+            <hr class="hr-light my-4">
+            <ul class="list-inline text-center list-unstyled">
+              <li class="list-inline-item">
+                <a class="p-2 fa-lg tw-ic">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="p-2 fa-lg li-ic">
+                  <i class="fab fa-facebook"> </i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a class="p-2 fa-lg ins-ic">
+                  <i class="fab fa-instagram"> </i>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+    <!-- Form with header -->
+
+  </section>
+  <!--Section: Content-->
+
+</div>
+<br/>
+
+<div class="container z-depth-1 my-5">
+
+	<section class="text-center py-5">
+
+		<p class="mb-4 pb-2 lead font-weight-bold orange-text">NOS PARTENAIRES</p>
+
+		<!-- Logo carousel -->
+		<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-interval="4000">
+			<div
+				class="carousel-inner">
+				<!-- First slide -->
+				<div
+					class="carousel-item active">
+					<!--Grid row-->
+					<div
+						class="row">
+
+						<!--First column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/5.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/First column-->
+
+						<!--Second column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/7.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Second column-->
+
+						<!--Third column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/6.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Third column-->
+
+						<!--Fourth column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/9.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Fourth column-->
+
+					</div>
+					<!--/Grid row-->
+				</div>
+				<!-- First slide -->
+
+				<!-- Second slide -->
+				<div
+					class="carousel-item">
+					<!--Grid row-->
+					<div
+						class="row">
+
+						<!--First column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/11.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/First column-->
+
+						<!--Second column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/10.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Second column-->
+
+						<!--Third column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/12.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Third column-->
+
+						<!--Fourth column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/13.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Fourth column-->
+
+					</div>
+					<!--/Grid row-->
+				</div>
+				<!-- Second slide -->
+
+				<!-- Third slide -->
+				<div
+					class="carousel-item">
+					<!--Grid row-->
+					<div
+						class="row">
+
+						<!--First column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/1a.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/First column-->
+
+						<!--Second column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/2a.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Second column-->
+
+						<!--Third column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/3a.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Third column-->
+
+						<!--Fourth column-->
+						<div class="col-lg-3 col-md-6 d-flex align-items-center justify-content-center">
+							<img src="https://mdbootstrap.com/img/Photos/Template/4a.png" class="img-fluid px-4" alt="Logo">
+						</div>
+						<!--/Fourth column-->
+
+					</div>
+					<!--/Grid row-->
+				</div>
+				<!-- Third slide -->
+			</div>
+
+		</div>
+		<!-- Logo carousel -->
+
+	</section>
+
+</div>
+{% include 'layouts/front/footer.html.twig' %}
+
+{% endblock %}
+
+{% block js %}
+  $('#play').on('click', function (e) {
+  e.preventDefault();
+  $("#player")[0].src += "?autoplay=1";
+  $('#player').show();
+  $('#video-cover').hide();
+})
+$('#modal1').on('hidden.bs.modal', function (e) {
+  $('#modal1 iframe').attr("src", $("#modal1 iframe").attr("src"));
+});
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Liste des Catégories
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+	<div class="container-fluid mt-5">
+
+		<h1>Liste des Catégories</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for category in categories %}
+					<tr>
+						<td>{{ category.id }}</td>
+						<td>{{ category.name }}</td>
+						<td>
+							<a href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-secondary">Éditer</a>
+							<form method="post" action="{{ path('category_delete', {'id': category.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?');">
+
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+								<button class="btn btn-danger">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3" align="center">Aucun enregistrement trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="text-right">
+			<a href="{{ path('category_new') }}" class="btn btn-primary">Créer une nouvelle catégorie</a>
+		</div>
+	</div>
+</main>
+{% endblock %}

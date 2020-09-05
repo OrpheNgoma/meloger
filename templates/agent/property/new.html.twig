@@ -1,0 +1,15 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title 'Enregistrer un bien' %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+
+		<h1>Créer un nouveau bien</h1>
+
+		{{ include ('admin/property/_form.html.twig', {form: form}) }}
+
+	</div>
+</main>
+{% endblock %}

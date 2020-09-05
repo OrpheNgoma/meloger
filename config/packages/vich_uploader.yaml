@@ -1,0 +1,18 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        property_image:
+           uri_prefix: /media/properties
+           upload_destination: '%kernel.project_dir%/public/media/properties'
+           namer: Vich\UploaderBundle\Naming\UniqidNamer
+        # ads_image:
+        #    uri_prefix: /media/ads
+        #    upload_destination: '%kernel.project_dir%/public/media/ads'
+        #    namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+    # mappings:
+    #    ads_image:
+    #        uri_prefix: /media/ads
+    #        upload_destination: '%kernel.project_dir%/public/media/ads'
+    #        namer: Vich\UploaderBundle\Naming\UniqidNamer

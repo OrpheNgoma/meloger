@@ -1,0 +1,48 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Liste des Fonctions
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+	<div class="container-fluid mt-5">
+
+		<h1>Liste des Fonctions</h1>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for fonction in fonctions %}
+					<tr>
+						<td>{{ fonction.id }}</td>
+						<td>{{ fonction.name }}</td>
+						<td>
+							<a href="{{ path('fonction_edit', {'id': fonction.id}) }}" class="btn btn-secondary">Éditer</a>
+							<form method="post" action="{{ path('fonction_delete', {'id': fonction.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?');">
+
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fonction.id) }}">
+								<button class="btn btn-danger">Supprimer</button>
+							</form>
+
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3" align="center">Aucun enregistrement trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="text-right">
+			<a href="{{ path('fonction_new') }}" class="btn btn-primary">Créer une fonction</a>
+		</div>
+	</div>
+</main>
+{% endblock %}

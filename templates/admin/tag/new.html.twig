@@ -1,0 +1,18 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Nouveau Tag
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+		<h1>Ajouter un nouveau Tag</h1>
+
+		{{ include('admin/tag/_form.html.twig') }}
+
+		<div align="right">
+			<a href="{{ path('tag_index') }}" class="btn btn-secondary">Retour à la liste</a>
+		</div>
+	</div>
+</main>
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title property.title %}
+
+{% block body %}
+
+<div class="jumbotron mt-5">
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-8">
+				<div data-slider>
+					{% if property.pictures is empty %}
+						<img src="{{ '/images/properties/guest-room.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+					{% else %}
+						{% for picture in property.pictures %}
+							<img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:50%;">
+						{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-md-4">
+				<h3>
+					{% for tag in property.tags %}
+						<a href="#" class="badge badge-success">{{ tag.name }}</a>
+					{% endfor %}
+				</h3>
+				<h3>{{ property.title }}</h3>
+				<h4>{{ property.rooms }}
+					pièce(s) -
+					{{ property.surface }}
+					m²</h4>
+				<div class="text-primary" style="font-size: 2rem;font-weight: bold;">{{ property.FormattedPrice }}
+					FCFA</div>
+				<a href="#" class="btn btn-primary">Contacter l'annonceur</a>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-4">
+
+	<p>
+		{{ property.description | nl2br }}
+	</p>
+
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Caractéristiques</h2>
+			<table class="table table striped">
+
+				<tr>
+					<td>Surface habitable</td>
+					<td>{{ property.surface }}
+						m²</td>
+				</tr>
+				<tr>
+					<td>Pièce(s)</td>
+					<td>{{ property.rooms }}</td>
+				</tr>
+				<tr>
+					<td>Chambre(s)</td>
+					<td>{{ property.bedrooms }}</td>
+				</tr>
+				<tr>
+					<td>Charge(s)</td>
+					<td>{{ property.chargeType }}</td>
+				</tr>
+				<tr>
+					<td>Etage</td>
+					<td>{{ property.floor }}</td>
+				</tr>
+				<tr>
+					<td>Ville</td>
+					<td>{{ property.city }}</td>
+				</tr>
+				<tr>
+					<td>Quartier</td>
+					<td>{{ property.address }}</td>
+				</tr>
+			</table>
+		</div>
+		<br/><br/>
+		<div class="col-md-4">
+			<h2>Spécificités</h2>
+			<ul class="list-group">
+				{% for option in property.options %}
+					<li class="list-group-item">{{ option.name }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="col-md-4">
+			<h2>Conditions</h2>
+			<ul class="list-group">
+				{% for condition in property.conditions %}
+					<li class="list-group-item">{{ condition.name }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div id="map" style="width: 100%; height: 400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
+</div>
+<br/>
+{% include 'layouts/front/footer.html.twig' %}
+
+{% endblock %}

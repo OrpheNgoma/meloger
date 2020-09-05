@@ -1,0 +1,20 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Nouvelle Option
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+
+		<h1>Créer une nouvelle option</h1>
+
+		{{ include('admin/option/_form.html.twig') }}
+
+		<div align="right">
+
+			<a href="{{ path('option_index') }}">retour à la liste</a>
+		</div>
+	</div>
+</main>
+{% endblock %}

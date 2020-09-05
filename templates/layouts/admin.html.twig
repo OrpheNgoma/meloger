@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}ME LOGER!
+			{% endblock %}
+		</title>
+		<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+
+		{% block stylesheets %}
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+			<link rel="stylesheet" href="{{ asset('build/css/bootstrap.min.css') }}">
+
+			<link rel="stylesheet" href="{{ asset('build/css/mdb.min.css') }}">
+
+			<link rel="stylesheet" href="{{ asset('build/css/style.css') }}">
+
+			<link
+			rel="stylesheet" href="{{ asset('build/css/style.min.css') }}">
+
+			<!-- Load Flashy default CSS -->
+			<link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
+
+		{% endblock %}
+	</head>
+	<body
+		class="fixed-sn light-blue-skin">
+
+		<!--Double navigation-->
+		<header>
+
+			{{ include ('layouts/sidenav.html.twig') }}
+
+			{{ include ('layouts/navbar.html.twig') }}
+		</header>
+		<!--/.Double navigation-->
+
+		<!--Main Layout-->
+		{% block body %}{% endblock %}
+		<!--Main Layout-->
+
+		{{ include ('layouts/footer.html.twig') }}
+
+		{% block javascripts %}
+			<script src="{{ asset('build/js/jquery-3.4.1.min.js') }}"></script>
+
+			<script src="{{ asset('build/js/popper.min.js') }}"></script>
+
+			<script src="{{ asset('build/js/bootstrap.min.js') }}"></script>
+
+			<script type="text/javascript" src="{{ asset('build/js/mdb.min.js') }}"></script>
+
+			<script src="{{ asset('build/app.js') }}"></script>
+
+			<!-- Flashy depends on jQuery -->
+			<script src="//code.jquery.com/jquery.js"></script>
+			<!-- Load Flashy default JavaScript -->
+			<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+
+			<!-- Initializations -->
+			<script type="text/javascript">
+				// Animations initialization
+new WOW().init();
+			</script>
+
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+
+			<script>
+				$('select').select2();
+			</script>
+
+		{% endblock %}
+		<!-- Include Flashy default partial -->
+		{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
+
+	</body>
+</html>

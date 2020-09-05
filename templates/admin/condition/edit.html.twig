@@ -1,0 +1,20 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Editer une Condition
+{% endblock %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+		<h1>Editer la Condition</h1>
+
+		{{ include('admin/condition/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+		<div align="right">
+			<a href="{{ path('condition_index') }}" class="btn btn-secondary">Retour à la liste</a>
+		</div>
+
+		{{ include('admin/condition/_delete_form.html.twig') }}
+	</div>
+</main>
+{% endblock %}

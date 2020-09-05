@@ -1,0 +1,60 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title 'Gérer les biens' %}
+
+{% block body %}
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+
+		<h2>Propriété(s) de
+			{{app.user.username}}
+			| Total:
+			{{app.user.properties|length}}
+		</h2>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Titre</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for property in app.user.properties %}
+					<tr>
+						<td>
+							{{ property.title }}
+						</td>
+						<td>
+							<a href="{{ path('property_edit', {id: property.id}) }}" class="btn btn-secondary">Editer</a>
+							<form method="post" action="{{ path('property_delete', {id: property.id}) }}" style="display: inline-block" onsubmit="return confirm('Êtes-vous vraiment sûr ?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
+								<button class="btn btn-danger">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3" align="center">Aucun enregistrement trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<div class="text-right">
+			<a href="{{ path('property_new') }} " class="btn btn-primary">Créer un nouveau bien</a>
+		</div>
+		<br><br>
+		{# <div class="pagination">
+													{{ knp_pagination_render(properties) }}
+												</div> #}
+	</div>
+</main>
+{% endblock %}

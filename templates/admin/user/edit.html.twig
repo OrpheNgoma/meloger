@@ -1,0 +1,15 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Modifier Utilisateur
+{% endblock %}
+{% block body %}
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+
+		{{ form_start(formUser) }}
+		{{ form_widget(formUser) }}
+		<button type="submit" class="btn btn-success">Modifier</button>
+		{{ form_end(formUser) }}
+	</div>
+</main>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tous nos biens !
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron mt-5">
+	<div class="container">
+		{{ form_start(form) }}
+		<div class="form-row align-items-end">
+			<div class="col-sm-4 col-lg-2 col-md-2">
+				{{ form_row(form.minSurface) }}
+			</div>
+			<div class="col-sm-4 col-lg-2 col-md-2">
+				{{ form_row(form.maxPrice) }}
+			</div>
+			<div class="col-sm-4 col-lg-2 col-md-2">
+				{{ form_row(form.options) }}
+			</div>
+			<div class="col-sm-4 col-lg-2 col-md-2">
+				{{ form_row(form.address, {id: 'search_address'}) }}
+			</div>
+			<div class="col-sm-4 col-lg-2 col-md-2">
+				{{ form_row(form.distance) }}
+			</div>
+			<div class="col-sm-4 col-lg-2 col-md-2">
+				<div class="form-group">
+					<button class="btn btn-primary">Rechercher</button>
+				</div>
+			</div>
+		</div>
+		{{ form_end(form)  }}
+	</div>
+</div>
+<div class="container mt-4">
+	<br/>
+	<h2 class="h2 orange-text" align="center" 
+	style="text-transform:uppercase;">Toutes les propriétés</h2>
+	<h6 align="center" style="color:grey;">Parcourir les propriétés à 
+	vendre et à louer au Gabon</h6>
+	<hr class="hr-dark my-4" width="255px">
+	</br>
+	<div class="row">
+
+		{% for property in properties %}
+			<div class="col-md-4">
+				{% include 'property/_property.html.twig' %}
+			</div>
+		{% endfor %}
+	</div>
+
+	<div class="pagination">
+		{{ knp_pagination_render(properties) }}
+	</div>
+</div>
+
+<br/><br/>
+
+<div class="container my-5 z-depth-1">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text">
+
+    <div class="row pr-lg-5">
+      <div class="col-md-7 mb-4">
+
+        <div class="view">
+          <img src="images/home11.png" class="img-fluid" alt="smaple image">
+        </div>
+
+      </div>
+      <div class="col-md-5 d-flex align-items-center">
+        <div>
+          
+		  <h3 class="h3-responsive mb-4">Trouvez un 
+			<span class="indigo-text">Logement</span><br>c'est bien, avec un 
+			<span class="orange-text">Contrat de bail</span>
+			c'est mieux.</h3>
+
+        	<p>Lorem ipsum dolor sit amet consectetur adip elit. Maiores deleniti explicabo voluptatem quisquam nulla asperiores aspernatur aperiam voluptate et consectetur minima delectus, fugiat eum soluta blanditiis adipisci, velit dolore magnam.</p>
+
+        	<button
+				class="btn btn-primary"
+				type="button"
+				data-toggle="collapse"
+				data-target="#collapseExample"
+				aria-expanded="false"
+				aria-controls="collapseExample"
+			>
+			Contactez-nous
+			</button>
+
+			<!-- Collapsed content -->
+			<div class="collapse mt-3" id="collapseExample">
+			<p><i class="fas fa-phone pr-2"></i>+241 074 42 79 89</p>
+			<p><i class="fas fa-phone pr-1"></i>+241 077 68 89 13</p>
+			<p><i class="fas fa-envelope pr-2"></i>meloger241@gmail.com</p>
+			</div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+
+{% include 'layouts/front/footer.html.twig' %}
+
+{% endblock %}
